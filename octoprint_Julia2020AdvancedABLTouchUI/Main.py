@@ -1272,7 +1272,7 @@ class MainUiClass(QtGui.QMainWindow, mainGUI_advanced_abl.Ui_MainWindow):
                 self.filePrintTimeSelected.setText('-')
             try:
                 self.filamentVolumeSelected.setText(
-                    ("%.2f cm" % file['gcodeAnalysis']['filament']['tool0']['volume']) + unichr(179))
+                    ("%.2f cm" % file['gcodeAnalysis']['filament']['tool0']['volume']) + chr(179))
             except KeyError:
                 self.filamentVolumeSelected.setText('-')
 
@@ -1297,7 +1297,7 @@ class MainUiClass(QtGui.QMainWindow, mainGUI_advanced_abl.Ui_MainWindow):
             else:
                 self.printPreviewSelected.setPixmap(QtGui.QPixmap(_fromUtf8("templates/img/thumbnail.png")))
         except:
-            print "Log: Nothing Selected"
+            print ("Log: Nothing Selected")
             # Set image fot print preview:
             # self.printPreviewSelected.setPixmap(QtGui.QPixmap(_fromUtf8("templates/img/fracktal.png")))
             # print self.fileListWidget.currentItem().text().replace(".gcode","")
@@ -1324,7 +1324,7 @@ class MainUiClass(QtGui.QMainWindow, mainGUI_advanced_abl.Ui_MainWindow):
             else:
                 self.printPreviewSelectedUSB.setPixmap(QtGui.QPixmap(_fromUtf8("templates/img/thumbnail.png")))
         except:
-            print "Log: Nothing Selected"
+            print ("Log: Nothing Selected")
 
             # Set Image from USB
 
@@ -1879,10 +1879,10 @@ class ThreadSanityCheck(QtCore.QThread):
                     for line in result:
                         if 'ch341-uart' in line:
                             self.MKSPort = line[line.index('ttyUSB'):line.index('ttyUSB') + 7]
-                            print self.MKSPort
+                            print (self.MKSPort)
                         elif 'FTDI' in line:
                             self.MKSPort = line[line.index('ttyUSB'):line.index('ttyUSB') + 7]
-                            print self.MKSPort
+                            print (self.MKSPort)
 
                 if not self.MKSPort:
                     octopiclient.connectPrinter(port="VIRTUAL", baudrate=115200)
